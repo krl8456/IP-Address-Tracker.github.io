@@ -1,0 +1,95 @@
+@import './modules/variables', './modules/centering';
+* {
+    font-size: $font-size;
+    font-family: 'Manrope', sans-serif;
+}
+html, body, h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+}
+// .container {
+//     @include centering(column);
+//     width: 100%;
+// }
+.header {
+    font-size: 1.5em;
+    width: 100%;
+    @include centering(column);
+    background: url(images/pattern-bg.png) no-repeat;
+    background-size: cover;
+    height: 50vh;
+    h1 {
+        font-size: 1.2em;
+        color: white;
+        margin-bottom: 1em;
+        margin-top: -2em;
+    }
+}
+.header-typing-bar {
+    border-radius: .5em;
+    overflow: hidden;
+    width: calc(min(90%, 30em));
+    position: relative;
+    #header-ip-bar {
+        height: 2.5em;
+        width: calc(100% - 3em);
+        border: 0;
+        padding-left: 1em;
+    }
+    .button {
+        position: absolute;
+        right: 0;
+        width: 3em;
+        height: 100%;
+        background-color: black;
+        border: 0;
+    }
+}
+.informations {
+    border-radius: 1em;
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 40%;
+    background-color: white;
+    @include centering(column);
+    font-weight: 700;
+    color: $dark-gray;
+    .one-inf p{
+        font-size: 0.8em;
+    }
+    .inf-api {
+        color: black;
+    }
+}
+#map {
+    height: 70vh;
+    z-index: -1;
+}
+@media (min-width: 700px) {
+    .informations {
+        // @include centering(row);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        box-shadow: 0px 11px 64px -10px rgba(0,0,0,0.75);
+        .one-inf {
+            padding-left: 10%;
+            padding-right: 5%;
+            position: relative;
+            .line {
+                position: absolute;
+                right: 0;
+                top: 20%;
+                height: 60%;
+                background-color: $dark-gray;
+                border: 1px solid $dark-gray;
+            }
+            // border: 2px solid black;
+        }
+        
+    }
+}

@@ -5,30 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
   <title>Frontend Mentor | IP Address Tracker</title>
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    .footer
+     { font-size: 11px; text-align: center; }
+    .footer a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
 <body>
-
-  IP Address Tracker
-
-  Search for any IP address or domain
-
-  IP Address
-  Location
-  Timezone
-    UTC <!-- add offset value dynamically using the API -->
-  ISP
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+  <div class="container">
+    <header class="header">
+      <h1>IP Address Tracker</h1>
+      <div class="header-typing-bar">
+        <form action="#">
+          <input type="text" name="ip" id="header-ip-bar" placeholder="Search for any IP address or domain"> 
+          <button class="button"><img src="images/icon-arrow.svg" alt="arrow"></button>
+        </form>
+      </div>
+    </header>
+    <main class="main">
+      <div class="informations"> 
+        <div class="one-inf"><p>IP Address <div class="inf-api ip-address"></div></p><div class="line"></div></div>
+        <div class="one-inf"><p>Location <div class="inf-api location"></div></p><div class="line"></div></div>
+        <div class="one-inf"><p>Timezone <div class="inf-api timezone"></div></p><div class="line"></div> </div>
+        <!-- UTC add offset value dynamically using the API -->
+        <div class="one-inf"><p>ISP <div class="inf-api isp"></div></p></div>
+      </div>
+      <div id="map"></div>
+    </main>
+    
+    
+    <!-- <footer>
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="https://github.com/krl8456" target="_blank">krl8456</a>.
+    </footer>     -->
   </div>
+<script src="main.js"
+></script>
 </body>
 </html>
