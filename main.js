@@ -4,64 +4,55 @@ const timezone = document.querySelector('.timezone')
 const isp = document.querySelector('.isp')
 const button = document.querySelector('.button')
 const inputText = document.querySelector('#header-ip-bar')
-const regexIP = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$/
+const checkIP = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$/
+const checkDomain = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/
 const errorMessage = document.querySelector('.error-message')
+const key = "at_te0oGANCmLf0jscxIxvBd7DXGH0V4"
 getData().catch(err => console.log(err.message))
 
 
 let coordinates
 let map
+let marker
 const myIcon = L.icon ({
     iconUrl: 'images/icon-location.svg',
     iconSize: [35, 45],
     iconAnchor: [22, 54],
     popupAnchor: [-3, -76]
 })
-let marker
 
 async function getData(address) {
     if (address === undefined) {
-        const response = await fetch('http://ip-api.com/json')
+        const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}`)
         const data = await response.json()
-        console.log(data)
-        coordinates = [data.lat, data.lon]
-        console.log(coordinates)
-        ip.textContent = data.query
-        loc.textContent = `${data.city}, ${data.countryCode} \u00A0${data.zip}`
-        timezone.textContent = data.timezone
-        isp.textContent = data.isp
+        settingMapAndData(data)
         createMap(coordinates)
-        // console.log(data)
-        //console.log(coordinates)
     }
-    else {
-        const response = await fetch(`http://ip-api.com/json/${address}`)
+    else if (address.match(checkDomain)) {
+        const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}&domain=${address}`)
         const data = await response.json()
-        console.log(data)
-        coordinates = [data.lat, data.lon]
-        console.log(coordinates)
-        ip.textContent = address
-        loc.textContent = `${data.city}, ${data.countryCode} \u00A0${data.zip}`
-        timezone.textContent = data.timezone
-        isp.textContent = data.isp
+        settingMapAndData(data)
         map.setView(coordinates, 13)
         marker.setLatLng(coordinates)
-        // console.log(data)
-        //console.log(coordinates)
+    }
+    else {
+        const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${key}&ipAddress=${address}`)
+        const data = await response.json()
+        settingMapAndData(data)
+        map.setView(coordinates, 13)
+        marker.setLatLng(coordinates)
     }
 }
 
 button.addEventListener('click' ,(e) => {
         e.preventDefault()
-        if(!inputText.value.match(regexIP)) {
-            errorMessage.textContent = "Please enter valid IP address"
+        if(!inputText.value.match(checkIP) && !inputText.value.match(checkDomain)) {
+            errorMessage.textContent = "Please enter valid IP address or domain"
         }
         else {
             errorMessage.textContent = ''
             getData(inputText.value).catch(err => console.log(err.message))
-        }
-        //console.log(coordinates)
-       
+        }     
 })
 function createMap(coordinates) {
     map = L.map('map').setView(coordinates, 13)
@@ -74,4 +65,11 @@ function createMap(coordinates) {
         zoomOffset: -1
     }).addTo(map)
     marker = L.marker(coordinates, {icon: myIcon}).addTo(map)
+}
+function settingMapAndData(data) {  
+    coordinates = [data.location.lat, data.location.lng]
+    ip.textContent = data.ip
+    loc.textContent = `${data.location.city}, ${data.location.country} \u00A0${data.location.geonameId}`
+    timezone.textContent = "USP " + data.location.timezone
+    isp.textContent = data.isp
 }
