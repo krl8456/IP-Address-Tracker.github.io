@@ -20,24 +20,25 @@ html, body {
     @include centering(column);
     background: url(images/pattern-bg.png) no-repeat;
     background-size: cover;
-    height: 50vh;
+    height: 12em;
     h1 {
-        font-size: 1.2em;
+        font-size: clamp(0.8em, 3vw, 1.2em);
         color: white;
         margin-bottom: 1em;
-        margin-top: -2em;
+        margin-top: -5em;
     }
 }
 .header-typing-bar {
     border-radius: .5em;
     overflow: hidden;
-    width: calc(min(90%, 30em));
+    width: calc(min(80%, 30em));
     position: relative;
     #header-ip-bar {
         height: 2.5em;
         width: calc(100% - 3em);
         border: 0;
         padding-left: 1em;
+        cursor: pointer;
     }
     .button {
         position: absolute;
@@ -46,20 +47,25 @@ html, body {
         height: 100%;
         background-color: black;
         border: 0;
+        cursor: pointer;
+        transition: 0.6s ease-in-out;
     }
 }
 .informations {
     border-radius: 1em;
-    width: 90%;
+    width: 80%;
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    top: 40%;
+    top: 10em;
     background-color: white;
     @include centering(column);
     font-weight: 700;
     color: $dark-gray;
+    padding-bottom: .5em;
+    z-index: 2;
     .one-inf p{
+        text-align: center;
         font-size: 0.8em;
     }
     .inf-api {
@@ -67,8 +73,14 @@ html, body {
     }
 }
 #map {
-    height: 70vh;
-    z-index: -1;
+    height: 90vh;
+    z-index: 1;
+}
+.error-message {
+    position: absolute;
+    top: 9.6em;
+    font-size: 0.6em;
+    color: red;
 }
 @media (min-width: 700px) {
     .informations {
@@ -80,16 +92,39 @@ html, body {
             padding-left: 10%;
             padding-right: 5%;
             position: relative;
+            height: 100%;
+            & p {
+                text-align: left;
+            }
+            .inf-api {
+                font-size: clamp(0.4em, 2vw, 1em);  
+            }
             .line {
                 position: absolute;
                 right: 0;
                 top: 20%;
-                height: 60%;
+                height: calc(60% + 0.5em);
                 background-color: $dark-gray;
                 border: 1px solid $dark-gray;
             }
             // border: 2px solid black;
         }
         
+    }
+    .header {
+        height: 9em;
+        h1 {
+            margin-bottom: 1em;
+            margin-top: -3em;
+        }
+    }
+    .informations {
+        top: 10em;
+    }
+    .error-message {
+        top: 9em;
+    }
+    .button:hover {
+        background-color: rgb(61, 61, 61);
     }
 }

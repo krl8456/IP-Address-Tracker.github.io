@@ -21,19 +21,19 @@ html, body {
   flex-direction: column;
   background: url(images/pattern-bg.png) no-repeat;
   background-size: cover;
-  height: 50vh;
+  height: 12em;
 }
 .header h1 {
-  font-size: 1.2em;
+  font-size: clamp(0.8em, 3vw, 1.2em);
   color: white;
   margin-bottom: 1em;
-  margin-top: -2em;
+  margin-top: -5em;
 }
 
 .header-typing-bar {
   border-radius: 0.5em;
   overflow: hidden;
-  width: min(90%, 30em);
+  width: min(80%, 30em);
   position: relative;
 }
 .header-typing-bar #header-ip-bar {
@@ -41,6 +41,7 @@ html, body {
   width: calc(100% - 3em);
   border: 0;
   padding-left: 1em;
+  cursor: pointer;
 }
 .header-typing-bar .button {
   position: absolute;
@@ -49,15 +50,17 @@ html, body {
   height: 100%;
   background-color: black;
   border: 0;
+  cursor: pointer;
+  transition: 0.6s ease-in-out;
 }
 
 .informations {
   border-radius: 1em;
-  width: 90%;
+  width: 80%;
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
-  top: 40%;
+  top: 10em;
   background-color: white;
   display: flex;
   align-items: center;
@@ -65,8 +68,11 @@ html, body {
   flex-direction: column;
   font-weight: 700;
   color: #969696;
+  padding-bottom: 0.5em;
+  z-index: 2;
 }
 .informations .one-inf p {
+  text-align: center;
   font-size: 0.8em;
 }
 .informations .inf-api {
@@ -74,8 +80,15 @@ html, body {
 }
 
 #map {
-  height: 70vh;
-  z-index: -1;
+  height: 90vh;
+  z-index: 1;
+}
+
+.error-message {
+  position: absolute;
+  top: 9.6em;
+  font-size: 0.6em;
+  color: red;
 }
 
 @media (min-width: 700px) {
@@ -88,13 +101,40 @@ html, body {
     padding-left: 10%;
     padding-right: 5%;
     position: relative;
+    height: 100%;
+  }
+  .informations .one-inf p {
+    text-align: left;
+  }
+  .informations .one-inf .inf-api {
+    font-size: clamp(0.4em, 2vw, 1em);
   }
   .informations .one-inf .line {
     position: absolute;
     right: 0;
     top: 20%;
-    height: 60%;
+    height: calc(60% + 0.5em);
     background-color: #969696;
     border: 1px solid #969696;
+  }
+
+  .header {
+    height: 9em;
+  }
+  .header h1 {
+    margin-bottom: 1em;
+    margin-top: -3em;
+  }
+
+  .informations {
+    top: 10em;
+  }
+
+  .error-message {
+    top: 9em;
+  }
+
+  .button:hover {
+    background-color: #3d3d3d;
   }
 }/*# sourceMappingURL=main.css.map */
